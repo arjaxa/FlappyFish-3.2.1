@@ -1,0 +1,58 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://hook.png" type="Texture" id=1]
+[ext_resource path="res://hook2.png" type="Texture" id=2]
+[ext_resource path="res://Scripts/Obstacle.gd" type="Script" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 30.8524, 21.66 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 12.2595, 30.8722 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 74.8358, 42.9022 )
+
+[node name="Obstacle" type="Node2D"]
+position = Vector2( 428.805, 24.1778 )
+script = ExtResource( 3 )
+
+[node name="KinematicBody2D" type="KinematicBody2D" parent="."]
+position = Vector2( 468.511, 19.5213 )
+
+[node name="Area2D" type="Area2D" parent="KinematicBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D/Area2D"]
+position = Vector2( -469.316, 150.029 )
+scale = Vector2( 0.36, 8.24 )
+shape = SubResource( 1 )
+
+[node name="hook2" type="Sprite" parent="KinematicBody2D"]
+position = Vector2( -469.654, 165.354 )
+scale = Vector2( 0.0418182, 0.173243 )
+texture = ExtResource( 2 )
+
+[node name="Area2D2" type="Area2D" parent="KinematicBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D/Area2D2"]
+position = Vector2( -413.398, 527.162 )
+scale = Vector2( 2.76, 6.36 )
+shape = SubResource( 3 )
+
+[node name="KinematicBody2D2" type="KinematicBody2D" parent="."]
+position = Vector2( 523.821, -6.50708 )
+
+[node name="Area2D" type="Area2D" parent="KinematicBody2D2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D2/Area2D"]
+position = Vector2( -535.115, 896.638 )
+scale = Vector2( 1.6, 3.36 )
+shape = SubResource( 2 )
+
+[node name="hook" type="Sprite" parent="KinematicBody2D2/Area2D"]
+position = Vector2( -536.533, 904.2 )
+scale = Vector2( 0.181621, -0.248799 )
+texture = ExtResource( 1 )
+[connection signal="body_entered" from="KinematicBody2D/Area2D" to="." method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="KinematicBody2D/Area2D2" to="." method="_on_Area2D2_body_exited"]
+[connection signal="body_entered" from="KinematicBody2D2/Area2D" to="." method="_on_Area2D_body_entered"]
